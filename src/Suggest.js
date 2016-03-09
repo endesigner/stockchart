@@ -3,7 +3,7 @@ function Suggest(list, filterFunction) {
 
   var defaultFilter = function(test) {
     return function(value){
-      var v = (value.code + ' ' + value.name).toLowerCase();
+      var v = (value[0] + ' ' + value[1]).toLowerCase();
       test = test.trim().toLowerCase();
       return RegExp(test).test(v);
     }

@@ -44,7 +44,7 @@ var App =  React.createClass({
   handleResize: function(e) {
     setTimeout(function(){
       this.setState({windowWidth: window.innerWidth});
-    }.bind(this), 1000);
+    }.bind(this), 200);
   },
 
   componentDidMount: function() {
@@ -81,7 +81,10 @@ var App =  React.createClass({
 
     var loading = (<div>LOADING {this.state.selected.code}</div>);
     var chart = (<Chart width={this.state.windowWidth} height="300" data={data} options={options} />);
-    console.log(this.state.windowWidth);
+
+    var suggestions = require('../assets/companies.js');
+    console.log(suggestions);
+
     return (
       <div>
         <div>Current window width: {this.state.windowWidth}</div>
@@ -89,6 +92,7 @@ var App =  React.createClass({
         <SearchBar
         onSelect={this.onSelect}
         value={this.state.selected}
+        data={suggestions}
         clearSuggestions={this.state.loading}
         />
 

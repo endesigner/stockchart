@@ -1,8 +1,6 @@
 var React = require('react');
 var Suggest = require('./Suggest');
 
-var data = require('dsv?delimiter=,!../assets/companies.csv');
-
 var SuggestionList = React.createClass({
   getDefaultProps: function(){
     return {
@@ -24,8 +22,8 @@ var SuggestionList = React.createClass({
       v = this.props.list[item];
       return (
         <li>
-          <a href="" data={v} onClick={this.onClick({code: v.code, name: v.name})}>
-            {v.code} {v.name}
+          <a href="" data={v} onClick={this.onClick({code: v[0], name: v[0]})}>
+            {v[0]} {v[1]}
           </a>
         </li>
       );
@@ -44,12 +42,13 @@ var SearchBar = React.createClass({
   },
 
   componentWillMount: function() {
-    this.suggest = Suggest(data);
+    console.log(this.props);
+    this.suggest = Suggest(this.props.data);
   },
 
   componentWillReceiveProps: function(nextProps){
-    var code = nextProps.value.code || '';
-    var name = nextProps.value.name || '';
+    var code = nextProps.value[0] || '';
+    var name = nextProps.value[1] || '';
 
     this.setState({
       value: (code + ' ' + name).trim(),
@@ -70,7 +69,7 @@ var SearchBar = React.createClass({
   render: function() {
     return (
       <div>
-        <input value={this.state.value} onClick={this.onClick} onChange={this.onChange} type="text" />
+        <input value={this.state.value} onChange={this.onChange} type="text" />
         <div>
           {this.state.suggestions.length > 0? <SuggestionList {...this.props} list={this.state.suggestions} /> : null}
         </div>

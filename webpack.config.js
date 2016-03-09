@@ -2,7 +2,7 @@ var path = require('path');
 
 var PATHS = {
   dist: path.resolve(__dirname + '/' + 'dist'),
-  src: path.resolve(__dirname + '/' + 'src')
+  src: path.resolve(__dirname)
 };
 
 module.exports = {
