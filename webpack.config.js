@@ -17,7 +17,6 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /\.csv?$/, loader: 'dsv-loader' },
       {
         test: /\.js?$/,
         exclude: /node_modules/,
@@ -25,6 +24,10 @@ module.exports = {
         query: {
           presets: ['react']
         }
+      },
+      {
+        test: /\.scss$/,
+        loader: ['raw','sass']
       }
     ]
   }

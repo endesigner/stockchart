@@ -1,7 +1,9 @@
 var React = require('react');
+var request = require('superagent');
 var SearchBar = require('./SearchBar');
 var Chart = require('./Chart');
-var request = require('superagent');
+
+require('raw!sass!../style.scss');
 
 var App =  React.createClass({
   getInitialState: function(){
@@ -83,8 +85,6 @@ var App =  React.createClass({
     var chart = (<Chart width={this.state.windowWidth} height="300" data={data} options={options} />);
 
     var suggestions = require('../assets/companies.js');
-    console.log(suggestions);
-
     return (
       <div>
         <div>Current window width: {this.state.windowWidth}</div>

@@ -21,7 +21,7 @@ var SuggestionList = React.createClass({
     list = Object.keys(this.props.list).map(function(item, index){
       v = this.props.list[item];
       return (
-        <li>
+        <li key={index}>
           <a href="" data={v} onClick={this.onClick({code: v[0], name: v[0]})}>
             {v[0]} {v[1]}
           </a>
