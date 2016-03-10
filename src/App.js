@@ -1,9 +1,9 @@
 var React = require('react');
 var request = require('superagent');
-var SearchBar = require('./SearchBar');
-var Chart = require('./Chart');
+var SearchBar = require('./search-bar');
+var Chart = require('./chart');
 
-require('raw!sass!../style.scss');
+require('!style!css!sass!./App.scss');
 
 var App =  React.createClass({
   getInitialState: function(){
@@ -16,7 +16,7 @@ var App =  React.createClass({
 
   onSelect: function(selection) {
     var url = 'https://www.quandl.com/api/v3/datasets/WIKI/'
-    + selection.code + '.json'
+    + selection[0] + '.json'
     + '?order=asc'
     + '&exclude_column_names=true'
     + '&end_date=2016-02-01'
@@ -81,17 +81,18 @@ var App =  React.createClass({
       legendTemplate : false
     };
 
-    var loading = (<div>LOADING {this.state.selected.code}</div>);
+    var loading = (<div>LOADING {this.state.selected[0]}</div>);
     var chart = (<Chart width={this.state.windowWidth} height="300" data={data} options={options} />);
 
     var suggestions = require('../assets/companies.js');
     return (
-      <div>
+      <div className="stockchart">
         <div>Current window width: {this.state.windowWidth}</div>
 
         <SearchBar
         onSelect={this.onSelect}
         value={this.state.selected}
+        placeholder="Sök på bolagsnamn eller tickerkod..."
         data={suggestions}
         clearSuggestions={this.state.loading}
         />

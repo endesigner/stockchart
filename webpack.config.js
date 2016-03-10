@@ -9,6 +9,7 @@ module.exports = {
   entry: {
     app: PATHS.src
   },
+  devtool: 'eval',
 
   output: {
     path: PATHS.dist,
@@ -27,9 +28,16 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ['raw','sass']
+        loader: [
+          'style',
+          'css?sourceMap',
+          'sass?sourceMap'
+        ]
       }
     ]
-  }
+  },
 
+  sassLoader: {
+    includePaths: [path.resolve(__dirname, "./src/scss")]
+  }
 };

@@ -1,5 +1,7 @@
 var React = require('react');
-var Suggest = require('./Suggest');
+var Suggest = require('../suggest');
+
+require('!style!css!sass!./SearchBar.scss');
 
 var SuggestionList = React.createClass({
   getDefaultProps: function(){
@@ -9,6 +11,7 @@ var SuggestionList = React.createClass({
   },
 
   onClick: function(selection){
+    console.log('clicked',selection);
     return function(event) {
       event.preventDefault();
       this.props.onSelect(selection);
@@ -22,7 +25,7 @@ var SuggestionList = React.createClass({
       v = this.props.list[item];
       return (
         <li key={index}>
-          <a href="" data={v} onClick={this.onClick({code: v[0], name: v[0]})}>
+          <a href="" data={v} onClick={this.onClick(v)}>
             {v[0]} {v[1]}
           </a>
         </li>
@@ -37,7 +40,8 @@ var SearchBar = React.createClass({
   getInitialState: function() {
     return {
       value: '',
-      suggestions: []
+      suggestions: [],
+      focused: false
     };
   },
 
@@ -47,6 +51,7 @@ var SearchBar = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps){
+    console.log('@@@',nextProps);
     var code = nextProps.value[0] || '';
     var name = nextProps.value[1] || '';
 
@@ -66,10 +71,25 @@ var SearchBar = React.createClass({
     });
   },
 
+  onFocus: function() {
+    this.setState({focused: true});
+  },
+  onBlur: function() {
+    this.setState({focused: false});
+  },
+
   render: function() {
     return (
       <div>
-        <input value={this.state.value} onChange={this.onChange} type="text" />
+        <input
+        value={this.state.value}
+        onChange={this.onChange}
+        placeholder={this.props.placeholder}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
+        className={this.state.focused? 'focused': null}
+        type="text" />
+
         <div>
           {this.state.suggestions.length > 0? <SuggestionList {...this.props} list={this.state.suggestions} /> : null}
         </div>
