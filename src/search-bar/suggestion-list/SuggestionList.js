@@ -20,6 +20,9 @@ var SuggestionList = React.createClass({
     var v, list;
 
     list = Object.keys(this.props.list).map(function(item, index){
+      // Don't render too many rows.
+      if (index > 14) return;
+
       v = this.props.list[item];
       return (
         <li key={index}>
