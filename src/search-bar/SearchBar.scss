@@ -1,12 +1,14 @@
-input {
-  width: 100%;
-  padding: 5px;
-  font-size:120%;
-  color: #888;
-  content: "HEJ";
+.search-bar {
+  position: relative;
 
-  &.focused {
-    color: #000;
+  input {
+    width: 100%;
+    padding: 5px;
+    font-size:120%;
+    color: #888;
+
+    &.focused {
+      color: #111;
+    }
   }
 }
-

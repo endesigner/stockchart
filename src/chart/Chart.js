@@ -128,6 +128,9 @@ var addData = function(nextProps, chart, setIndex, pointIndex) {
   chart.addData(values, nextProps.data.labels[setIndex]);
 };
 
+
+require('!style!css!sass!./Chart.scss');
+
 var Chart = React.createClass({
   getInitialState: function() {
     return {};
@@ -135,7 +138,11 @@ var Chart = React.createClass({
 
   render: function() {
     var ChartElement = ChartWrapper.createClass('Line', ['getPointsAtEvent']);
-    return <div><ChartElement {...this.props} /></div>
+    return (
+      <div className="chart">
+        <ChartElement {...this.props} />
+      </div>
+    );
   }
 });
 

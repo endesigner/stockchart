@@ -1,40 +1,8 @@
 var React = require('react');
+var SuggestionList = require('./suggestion-list');
 var Suggest = require('../suggest');
 
 require('!style!css!sass!./SearchBar.scss');
-
-var SuggestionList = React.createClass({
-  getDefaultProps: function(){
-    return {
-      onSelect: function(){}
-    };
-  },
-
-  onClick: function(selection){
-    console.log('clicked',selection);
-    return function(event) {
-      event.preventDefault();
-      this.props.onSelect(selection);
-    }.bind(this);
-  },
-
-  render: function(){
-    var v, list;
-
-    list = Object.keys(this.props.list).map(function(item, index){
-      v = this.props.list[item];
-      return (
-        <li key={index}>
-          <a href="" data={v} onClick={this.onClick(v)}>
-            {v[0]} {v[1]}
-          </a>
-        </li>
-      );
-    }, this);
-
-    return (<ul>{list}</ul>)
-  }
-});
 
 var SearchBar = React.createClass({
   getInitialState: function() {
@@ -46,12 +14,10 @@ var SearchBar = React.createClass({
   },
 
   componentWillMount: function() {
-    console.log(this.props);
     this.suggest = Suggest(this.props.data);
   },
 
   componentWillReceiveProps: function(nextProps){
-    console.log('@@@',nextProps);
     var code = nextProps.value[0] || '';
     var name = nextProps.value[1] || '';
 
@@ -80,7 +46,7 @@ var SearchBar = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className="search-bar">
         <input
         value={this.state.value}
         onChange={this.onChange}

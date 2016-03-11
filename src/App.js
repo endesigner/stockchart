@@ -1,9 +1,10 @@
+require('!style!css!sass!./App.scss');
+
 var React = require('react');
 var request = require('superagent');
+
 var SearchBar = require('./search-bar');
 var Chart = require('./chart');
-
-require('!style!css!sass!./App.scss');
 
 var App =  React.createClass({
   getInitialState: function(){
@@ -78,17 +79,16 @@ var App =  React.createClass({
       bezierCurve : false,
       pointDot : false,
       datasetFill : false,
-      legendTemplate : false
+      legendTemplate : false,
+      scaleLabel: "<%='  '+value%>"
     };
 
-    var loading = (<div>LOADING {this.state.selected[0]}</div>);
+    var loading = (<div className="loader" >Laddar {this.state.selected[0]}...</div>);
     var chart = (<Chart width={this.state.windowWidth} height="300" data={data} options={options} />);
 
     var suggestions = require('../assets/companies.js');
     return (
       <div className="stockchart">
-        <div>Current window width: {this.state.windowWidth}</div>
-
         <SearchBar
         onSelect={this.onSelect}
         value={this.state.selected}

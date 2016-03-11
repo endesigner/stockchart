@@ -1,0 +1,21 @@
+ul {
+  position: absolute;
+  width: 100%;
+  padding: 5px;
+  background: rgba(221,221,221,0.8);
+
+  > li {
+    font-family: Arial, Verdana;
+
+    > a {
+      display: inline-block;
+      padding: 3px 0;
+      text-decoration: none;
+      color: #111;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
