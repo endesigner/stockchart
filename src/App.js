@@ -22,8 +22,7 @@ var App =  React.createClass({
     + '&exclude_column_names=true'
     + '&end_date=2016-02-01'
     + '&start_date=2006-02-01'
-    + '&column_index=4'
-    + '&api_key=tdwVQPPfys3QRsoS5x3x';
+    + '&column_index=4';
 
     request
     .get(url)
